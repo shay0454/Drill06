@@ -1,5 +1,4 @@
 import os
-import random
 from pico2d import*
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -14,8 +13,10 @@ x1,y1=x,y
 hand_x,hand_y=TUK_WIDTH//2,TUK_HEIGHT//2
 clicks=[]
 running=True
-frame,num_of_moves,t=0,20,0
+frame,t=0,0
+num_of_moves=20
 direction=0
+
 def handle_events():
     global running,hand_x,hand_y,TUK_HEIGHT,clicks
     events=get_events()
