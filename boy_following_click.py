@@ -32,6 +32,8 @@ while(running):
     clear_canvas()
     TUK_GROUND.draw(TUK_WIDTH//2,TUK_HEIGHT//2)
     hand.draw(hand_x,hand_y)
+    for click in clicks:
+        hand.draw(click[0],click[1])
     if x==x1 and y==y1:
         if len(clicks)!=0:
             x1,y1=clicks[0][0],clicks[0][1]
@@ -42,16 +44,13 @@ while(running):
             if x1==x and y1==y:
                 x0,y0=x,y
                 del clicks[0]
-        else:
-            ch.clip_draw(0,direction*100+200,100,100,x,y)
+        ch.clip_draw(0,direction*100+200,100,100,x,y)
     else:
         ch.clip_draw(frame*100,direction*100,100,100,x,y)
         per=1/num_of_moves
         x,y=(1-per*t)*x0+per*t*x1,(1-per*t)*y0+per*t*y1
         t=(t+1)%(num_of_moves+1)
         frame=(frame+1)%8
-    for click in clicks:
-        hand.draw(click[0],click[1])
     update_canvas()
     handle_events()
     delay(0.03)
