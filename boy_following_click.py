@@ -11,24 +11,29 @@ TUK_GROUND=load_image("TUK_GROUND.png")
 x,y=TUK_WIDTH//2,TUK_HEIGHT//2
 x0,y0=x,y
 hand_x,hand_y=TUK_WIDTH//2,TUK_HEIGHT//2
+clicks=[]
 running=True
 frame,num_of_moves,t=0,20,0
 direction=0
 def handle_events():
-    global running,hand_x,hand_y,TUK_HEIGHT
+    global running,hand_x,hand_y,TUK_HEIGHT,clicks
     events=get_events()
     for event in events:
         if event.type==SDL_KEYDOWN:
             if event.key==SDLK_ESCAPE:
                 running=False
         elif event.type==SDL_MOUSEMOTION:
-            hand_x,hand_y=event.x,TUK_HEIGHT-event.y
+            hand_x,hand_y=event.x,TUK_HEIGHT-event.y-1
+        elif event.type==SDL_MOUSEBUTTONDOWN:
+            clicks.append((event.x,TUK_HEIGHT-event.y-1))
             
 while(running):
     clear_canvas()
     TUK_GROUND.draw(TUK_WIDTH//2,TUK_HEIGHT//2)
     ch.clip_draw(frame*100,direction*100,100,100,x,y)
     hand.draw(hand_x,hand_y)
+    for click in clicks:
+        hand.draw(click[0],click[1])
     handle_events()
     update_canvas()
     delay(0.03)
