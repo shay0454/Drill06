@@ -15,12 +15,14 @@ running=True
 frame,num_of_moves,t=0,20,0
 direction=0
 def handle_events():
-    global running,hand_x,hand_y
+    global running,hand_x,hand_y,TUK_HEIGHT
     events=get_events()
     for event in events:
         if event.type==SDL_KEYDOWN:
             if event.key==SDLK_ESCAPE:
                 running=False
+        elif event.type==SDL_MOUSEMOTION:
+            hand_x,hand_y=event.x,TUK_HEIGHT-event.y
             
 while(running):
     clear_canvas()
